@@ -245,6 +245,234 @@ document.addEventListener('DOMContentLoaded', function() {
         adjustRtlSpecifics();
     }
     
+    // WhatsApp Contact Form Integration with Location Support
+    const whatsappBtn = document.getElementById('whatsappSubmitBtn');
+    if (whatsappBtn) {
+        // Use the WhatsApp phone number you want to receive messages to
+        const whatsappNumber = '201157299077'; // WhatsApp number with country code but no + sign
+        
+        // Location access controls
+        let userLocation = null;
+        const locationCheckbox = document.getElementById('includeLocation');
+        const locationStatusDiv = document.getElementById('locationStatus');
+        
+        // Initialize location status text
+        function updateLocationStatusText(status, isError = false) {
+            if (!locationStatusDiv) return;
+            
+            locationStatusDiv.style.display = 'block';
+            locationStatusDiv.textContent = status;
+            locationStatusDiv.className = `small mt-1 ${isError ? 'text-danger' : 'text-muted'}`;
+        }
+        
+        // Event listener for location checkbox
+        if (locationCheckbox && locationStatusDiv) {
+            locationCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    // Request location when checkbox is checked
+                    updateLocationStatusText(currentLang === 'en' ? 'Requesting location access...' : 'جاري طلب الوصول إلى الموقع...');
+                    
+                    if ('geolocation' in navigator) {
+                        navigator.geolocation.getCurrentPosition(
+                            // Success callback
+                            (position) => {
+                                userLocation = {
+                                    latitude: position.coords.latitude,
+                                    longitude: position.coords.longitude,
+                                    accuracy: position.coords.accuracy
+                                };
+                                updateLocationStatusText(
+                                    currentLang === 'en' 
+                                        ? 'Location accessed successfully!' 
+                                        : 'تم الوصول إلى الموقع بنجاح!'
+                                );
+                                console.log('Location obtained:', userLocation);
+                            },
+                            // Error callback
+                            (error) => {
+                                console.error('Geolocation error:', error);
+                                let errorMessage = '';
+                                
+                                if (currentLang === 'en') {
+                                    switch(error.code) {
+                                        case error.PERMISSION_DENIED:
+                                            errorMessage = 'Location access denied. Please enable location permission in your browser settings.';
+                                            break;
+                                        case error.POSITION_UNAVAILABLE:
+                                            errorMessage = 'Location information is unavailable.';
+                                            break;
+                                        case error.TIMEOUT:
+                                            errorMessage = 'Location request timed out.';
+                                            break;
+                                        default:
+                                            errorMessage = 'Unknown error occurred while getting location.';
+                                    }
+                                } else {
+                                    // Arabic error messages
+                                    switch(error.code) {
+                                        case error.PERMISSION_DENIED:
+                                            errorMessage = 'تم رفض الوصول إلى الموقع. يرجى تمكين إذن الموقع في إعدادات المتصفح.';
+                                            break;
+                                        case error.POSITION_UNAVAILABLE:
+                                            errorMessage = 'معلومات الموقع غير متوفرة.';
+                                            break;
+                                        case error.TIMEOUT:
+                                            errorMessage = 'انتهت مهلة طلب الموقع.';
+                                            break;
+                                        default:
+                                            errorMessage = 'حدث خطأ غير معروف أثناء الحصول على الموقع.';
+                                    }
+                                }
+                                
+                                updateLocationStatusText(errorMessage, true);
+                                // Uncheck the box if location access fails
+                                locationCheckbox.checked = false;
+                            },
+                            // Options
+                            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                        );
+                    } else {
+                        // Geolocation not supported
+                        updateLocationStatusText(
+                            currentLang === 'en' 
+                                ? 'Geolocation is not supported by your browser.' 
+                                : 'تحديد الموقع الجغرافي غير مدعوم من متصفحك.',
+                            true
+                        );
+                        locationCheckbox.checked = false;
+                    }
+                } else {
+                    // Checkbox unchecked - clear saved location
+                    userLocation = null;
+                    locationStatusDiv.style.display = 'none';
+                }
+            });
+        }
+        
+        // Main WhatsApp send button event
+        whatsappBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('WhatsApp button clicked');
+            
+            try {
+                // Get form values directly
+                const name = document.getElementById('contactName').value.trim();
+                const email = document.getElementById('contactEmail').value.trim();
+                const subject = document.getElementById('contactSubject').value.trim();
+                const message = document.getElementById('contactMessage').value.trim();
+                const includeLocation = locationCheckbox ? locationCheckbox.checked : false;
+                
+                // Debug form values
+                console.log('Form values:', { name, email, subject, message, includeLocation });
+                
+                // Validate form
+                if (!name || !email || !message) {
+                    alert(currentLang === 'en' ? 'Please fill all required fields.' : 'يرجى ملء جميع الحقول المطلوبة.');
+                    return;
+                }
+                
+                // Check if location was requested but not available
+                if (includeLocation && !userLocation) {
+                    // Trying to get location again
+                    if ('geolocation' in navigator) {
+                        const locationPrompt = currentLang === 'en' 
+                            ? 'Getting your location... Please wait.' 
+                            : 'جاري الحصول على موقعك... يرجى الانتظار.';
+                            
+                        alert(locationPrompt);
+                        navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                                userLocation = {
+                                    latitude: position.coords.latitude,
+                                    longitude: position.coords.longitude,
+                                    accuracy: position.coords.accuracy
+                                };
+                                // Call sendWhatsAppMessage again after getting location
+                                sendWhatsAppMessage(name, email, subject, message, userLocation);
+                            },
+                            (error) => {
+                                console.error('Geolocation error on send:', error);
+                                const proceed = confirm(currentLang === 'en' 
+                                    ? 'Could not access your location. Do you want to proceed without including location?' 
+                                    : 'لم نتمكن من الوصول إلى موقعك. هل تريد المتابعة بدون تضمين الموقع؟');
+                                
+                                if (proceed) {
+                                    // User wants to proceed without location
+                                    sendWhatsAppMessage(name, email, subject, message, null);
+                                }
+                            }
+                        );
+                        return;
+                    } else {
+                        // Geolocation not supported but user wants to include location
+                        const proceed = confirm(currentLang === 'en' 
+                            ? 'Your browser does not support geolocation. Do you want to proceed without including location?' 
+                            : 'متصفحك لا يدعم تحديد الموقع الجغرافي. هل تريد المتابعة بدون تضمين الموقع؟');
+                        
+                        if (!proceed) return;
+                        // Continue without location if user confirms
+                    }
+                }
+                
+                // Send WhatsApp message with optional location
+                sendWhatsAppMessage(name, email, subject, message, includeLocation ? userLocation : null);
+                
+            } catch (error) {
+                console.error('Error in WhatsApp sending:', error);
+                alert('An error occurred when trying to send via WhatsApp.');
+            }
+        });
+        
+        // Function to format and send WhatsApp message
+        function sendWhatsAppMessage(name, email, subject, message, locationData) {
+            // Format WhatsApp message
+            let whatsappMessage = 
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                (subject ? `Subject: ${subject}\n` : '') +
+                `Message: ${message}`;
+            
+            // Add location if available
+            if (locationData) {
+                const locationUrl = `https://maps.google.com/maps?q=${locationData.latitude},${locationData.longitude}&z=15`;
+                whatsappMessage += `\n\nLocation: ${locationUrl}\n` +
+                                   `Coordinates: ${locationData.latitude}, ${locationData.longitude}\n` +
+                                   `Accuracy: ~${Math.round(locationData.accuracy)} meters`;
+            }
+            
+            // Create WhatsApp URL with international format
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+            console.log('Opening WhatsApp URL:', whatsappUrl);
+            
+            // Set up the manual fallback link
+            const fallbackDiv = document.getElementById('whatsappFallback');
+            const manualLink = document.getElementById('manualWhatsappLink');
+            
+            if (fallbackDiv && manualLink) {
+                manualLink.href = whatsappUrl;
+                fallbackDiv.style.display = 'block';
+            }
+            
+            try {
+                // Open WhatsApp directly
+                window.location.href = whatsappUrl;
+                
+                // Reset form after a delay to ensure the navigation has started
+                setTimeout(() => {
+                    const form = document.getElementById('whatsappContactForm');
+                    if (form) form.reset();
+                    if (locationStatusDiv) locationStatusDiv.style.display = 'none';
+                    userLocation = null;
+                }, 500);
+            } catch (e) {
+                console.error('Error redirecting to WhatsApp:', e);
+                alert('Please use the manual link below the form to send your message via WhatsApp.');
+            }
+        }
+    } else {
+        console.error('WhatsApp submit button not found!');
+    }
+    
     // YouTube video lazy loading
     const videoContainer = document.querySelector('.video-container');
     if (videoContainer) {

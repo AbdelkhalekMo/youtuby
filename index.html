@@ -333,20 +333,29 @@
                     </div>
                 </div>
                 <div class="col-md-6" data-aos="fade-left">
-                    <form class="contact-form">
+                    <form id="whatsappContactForm" class="contact-form">
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Your Name" data-lang-key="contact_form_name" data-lang-type="placeholder" required>
+                            <input type="text" id="contactName" class="form-control" placeholder="Your Name" data-lang-key="contact_form_name" data-lang-type="placeholder" required>
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Your Email" data-lang-key="contact_form_email" data-lang-type="placeholder" required>
+                            <input type="email" id="contactEmail" class="form-control" placeholder="Your Email" data-lang-key="contact_form_email" data-lang-type="placeholder" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Subject" data-lang-key="contact_form_subject" data-lang-type="placeholder">
+                            <input type="text" id="contactSubject" class="form-control" placeholder="Subject" data-lang-key="contact_form_subject" data-lang-type="placeholder">
                         </div>
                         <div class="mb-3">
-                            <textarea class="form-control" rows="5" placeholder="Your Message" data-lang-key="contact_form_message" data-lang-type="placeholder" required></textarea>
+                            <textarea id="contactMessage" class="form-control" rows="5" placeholder="Your Message" data-lang-key="contact_form_message" data-lang-type="placeholder" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" data-lang-key="contact_form_button">Send Message</button>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="includeLocation">
+                            <label class="form-check-label" for="includeLocation" data-lang-key="contact_form_location_check">Include my current location</label>
+                            <div id="locationStatus" class="small text-muted mt-1" style="display: none;"></div>
+                        </div>
+                        <button type="submit" id="whatsappSubmitBtn" class="btn btn-primary" data-lang-key="contact_form_button">Send via WhatsApp</button>
+                        <div id="whatsappFallback" class="mt-3" style="display: none;">
+                            <small class="text-muted" data-lang-key="whatsapp_fallback_text">If the button doesn't work, you can</small>
+                            <a href="#" id="manualWhatsappLink" target="_blank" class="d-block mt-1" data-lang-key="whatsapp_fallback_link">Click here to send via WhatsApp</a>
+                        </div>
                     </form>
                 </div>
             </div>

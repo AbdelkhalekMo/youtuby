@@ -69,12 +69,17 @@ const translations = {
         contact_form_email: "Your Email",
         contact_form_subject: "Subject",
         contact_form_message: "Your Message",
-        contact_form_button: "Send Message",
+        contact_form_location_check: "Include my current location",
+        contact_form_button: "Send via WhatsApp",
         
         // Footer
         footer_copyright: "© 2024 Your Company Name. All Rights Reserved.",
         footer_privacy: "Privacy Policy",
-        footer_terms: "Terms of Service"
+        footer_terms: "Terms of Service",
+        
+        // WhatsApp fallback
+        whatsapp_fallback_text: "If the button doesn't work, you can",
+        whatsapp_fallback_link: "Click here to send via WhatsApp"
     },
     ar: {
         // Navigation
@@ -141,11 +146,16 @@ const translations = {
         contact_form_email: "بريدك الإلكتروني",
         contact_form_subject: "الموضوع",
         contact_form_message: "رسالتك",
-        contact_form_button: "إرسال الرسالة",
+        contact_form_location_check: "تضمين موقعي الحالي",
+        contact_form_button: "إرسال عبر واتساب",
         
         // Footer
         footer_copyright: "© 2024 اسم شركتك. جميع الحقوق محفوظة.",
         footer_privacy: "سياسة الخصوصية",
-        footer_terms: "شروط الخدمة"
+        footer_terms: "شروط الخدمة",
+        
+        // WhatsApp fallback
+        whatsapp_fallback_text: "إذا لم يعمل الزر، يمكنك",
+        whatsapp_fallback_link: "النقر هنا للإرسال عبر واتساب"
     }
 };
