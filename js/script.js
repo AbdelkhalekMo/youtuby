@@ -1,10 +1,17 @@
 /**
  * YouTube Services Landing Page
  * Custom JavaScript for enhanced interactivity
+ * With multi-language support (English/Arabic)
  */
 
 document.addEventListener('DOMContentLoaded', function() {
     'use strict';
+
+    // Initialize language based on stored preference or default to English
+    let currentLang = localStorage.getItem('ytcreator_lang') || 'en';
+    
+    // Set the initial language on page load
+    applyLanguage(currentLang);
 
     // Initialize AOS animation library
     AOS.init({
@@ -151,6 +158,92 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', animateOnScroll);
     animateOnScroll(); // Run once on load
+    
+    // Language switcher functionality
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.addEventListener('click', function() {
+            // Toggle between 'en' and 'ar'
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            
+            // Save language preference
+            localStorage.setItem('ytcreator_lang', currentLang);
+            
+            // Apply the language
+            applyLanguage(currentLang);
+        });
+    }
+    
+    /**
+     * Apply language translations to the whole page
+     * @param {string} lang - Language code ('en' or 'ar')
+     */
+    function applyLanguage(lang) {
+        // Update language indicator in button
+        const langIndicator = document.getElementById('currentLang');
+        if (langIndicator) {
+            langIndicator.textContent = lang.toUpperCase();
+        }
+        
+        // Apply RTL/LTR direction
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        
+        // Toggle RTL/LTR specific CSS classes
+        document.body.classList.toggle('rtl', lang === 'ar');
+        
+        // Apply translations to all elements with data-lang-key attribute
+        document.querySelectorAll('[data-lang-key]').forEach(element => {
+            const key = element.getAttribute('data-lang-key');
+            
+            // Check if this is a placeholder translation
+            const langType = element.getAttribute('data-lang-type');
+            if (langType === 'placeholder') {
+                element.placeholder = translations[lang][key] || element.placeholder;
+            } else {
+                // Regular text content translation
+                element.textContent = translations[lang][key] || element.textContent;
+            }
+        });
+        
+        // Handle the RTL/LTR specific adjustments
+        const adjustRtlSpecifics = () => {
+            const navbarNav = document.querySelector('.navbar-nav');
+            if (navbarNav) {
+                if (lang === 'ar') {
+                    navbarNav.classList.remove('ms-auto');
+                    navbarNav.classList.add('me-auto');
+                } else {
+                    navbarNav.classList.remove('me-auto');
+                    navbarNav.classList.add('ms-auto');
+                }
+            }
+            
+            // Adjust margin classes for RTL/LTR
+            document.querySelectorAll('.me-1, .me-2, .me-3, .ms-1, .ms-2, .ms-auto').forEach(el => {
+                if (el.classList.contains('me-1') && lang === 'ar') {
+                    el.classList.replace('me-1', 'ms-1');
+                } else if (el.classList.contains('ms-1') && lang === 'en') {
+                    el.classList.replace('ms-1', 'me-1');
+                }
+                
+                if (el.classList.contains('me-2') && lang === 'ar') {
+                    el.classList.replace('me-2', 'ms-2');
+                } else if (el.classList.contains('ms-2') && lang === 'en') {
+                    el.classList.replace('ms-2', 'me-2');
+                }
+                
+                if (el.classList.contains('me-3') && lang === 'ar') {
+                    el.classList.replace('me-3', 'ms-3');
+                } else if (el.classList.contains('ms-3') && lang === 'en') {
+                    el.classList.replace('ms-3', 'me-3');
+                }
+            });
+        };
+        
+        // Apply RTL/LTR adjustments
+        adjustRtlSpecifics();
+    }
     
     // YouTube video lazy loading
     const videoContainer = document.querySelector('.video-container');

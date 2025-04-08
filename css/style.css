@@ -1,6 +1,7 @@
 /*
 * YouTube Services Landing Page
 * Modern, responsive landing page with beautiful transitions
+* With multi-language support (English/Arabic)
 */
 
 /* ======= General Styles ======= */
@@ -629,4 +630,91 @@ section {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* ======= Language Switch Styles ======= */
+.lang-switch {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+#langToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+#langToggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar.scrolled #langToggle {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* ======= RTL (Right to Left) Support ======= */
+.rtl {
+    text-align: right;
+}
+
+.rtl .navbar-nav {
+    padding-right: 0;
+}
+
+.rtl .section-divider {
+    margin: 15px auto; /* Keep centered for both LTR and RTL */
+}
+
+.rtl .service-card,
+.rtl .testimonial-card,
+.rtl .contact-form {
+    text-align: right;
+}
+
+.rtl .hero-section h1,
+.rtl .hero-section p {
+    text-align: right;
+}
+
+.rtl .service-icon {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.rtl .service-buy-btn i,
+.rtl .hero-buttons a i {
+    margin-left: 8px;
+    margin-right: 0;
+}
+
+.rtl .testimonial-content {
+    text-align: right;
+}
+
+.rtl .contact-item {
+    flex-direction: row-reverse;
+}
+
+.rtl .contact-item i {
+    margin-left: 15px;
+    margin-right: 0;
+}
+
+.rtl .social-links a {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.rtl .footer-link {
+    margin-left: 0;
+    margin-right: 20px;
 }

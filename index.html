@@ -38,19 +38,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
+                        <a class="nav-link active" href="#home" data-lang-key="nav_home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
+                        <a class="nav-link" href="#services" data-lang-key="nav_services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                        <a class="nav-link" href="#portfolio" data-lang-key="nav_portfolio">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                        <a class="nav-link" href="#testimonials" data-lang-key="nav_testimonials">Testimonials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#contact" data-lang-key="nav_contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="lang-switch">
+                            <button id="langToggle" class="btn btn-sm btn-outline-light">
+                                <i class="fas fa-globe me-1"></i><span id="currentLang">EN</span>
+                            </button>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -63,12 +70,12 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
-                    <h1 class="display-4 fw-bold text-white">Premium YouTube Content Creation Services</h1>
-                    <p class="lead text-white">Transform your ideas into engaging YouTube content that captivates and converts your audience</p>
+                    <h1 class="display-4 fw-bold text-white" data-lang-key="hero_title">Premium YouTube Content Creation Services</h1>
+                    <p class="lead text-white" data-lang-key="hero_subtitle">Transform your ideas into engaging YouTube content that captivates and converts your audience</p>
                     <div class="hero-buttons">
-                        <a href="#services" class="btn btn-primary btn-lg me-3">Our Services</a>
+                        <a href="#services" class="btn btn-primary btn-lg me-3" data-lang-key="hero_button_services">Our Services</a>
                         <a href="https://wa.me/+201157299077" target="_blank" class="btn btn-outline-light btn-lg">
-                            <i class="fab fa-whatsapp me-2"></i>Contact Now
+                            <i class="fab fa-whatsapp me-2"></i><span data-lang-key="hero_button_contact">Contact Now</span>
                         </a>
                     </div>
                 </div>
@@ -85,9 +92,9 @@
     <section id="services" class="services-section py-5">
         <div class="container">
             <div class="section-header text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Our Premium Services</h2>
+                <h2 class="fw-bold" data-lang-key="services_title">Our Premium Services</h2>
                 <div class="section-divider"></div>
-                <p class="lead">Comprehensive solutions for your YouTube content needs</p>
+                <p class="lead" data-lang-key="services_subtitle">Comprehensive solutions for your YouTube content needs</p>
             </div>
             
             <div class="row g-4">
@@ -96,10 +103,10 @@
                         <div class="service-icon">
                             <i class="fas fa-video"></i>
                         </div>
-                        <h3>Video Production</h3>
-                        <p>Professional video production with cutting-edge equipment to ensure your content stands out.</p>
+                        <h3 data-lang-key="service1_title">Video Production</h3>
+                        <p data-lang-key="service1_desc">Professional video production with cutting-edge equipment to ensure your content stands out.</p>
                         <a href="https://wa.me/yourphonenumber?text=I'm%20interested%20in%20your%20Video%20Production%20service" target="_blank" class="btn btn-primary service-buy-btn">
-                            <i class="fas fa-shopping-cart me-2"></i>Buy Now
+                            <i class="fas fa-shopping-cart me-2"></i><span data-lang-key="service_buy_button">Buy Now</span>
                         </a>
                     </div>
                 </div>
@@ -108,10 +115,10 @@
                         <div class="service-icon">
                             <i class="fas fa-edit"></i>
                         </div>
-                        <h3>Content Editing</h3>
-                        <p>Expert editing services that transform raw footage into engaging, polished final products.</p>
+                        <h3 data-lang-key="service2_title">Content Editing</h3>
+                        <p data-lang-key="service2_desc">Expert editing services that transform raw footage into engaging, polished final products.</p>
                         <a href="https://wa.me/yourphonenumber?text=I'm%20interested%20in%20your%20Video%20Production%20service" target="_blank" class="btn btn-primary service-buy-btn">
-                            <i class="fas fa-shopping-cart me-2"></i>Buy Now
+                            <i class="fas fa-shopping-cart me-2"></i><span data-lang-key="service_buy_button">Buy Now</span>
                         </a>
                     </div>
                 </div>
@@ -120,10 +127,10 @@
                         <div class="service-icon">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3>SEO Optimization</h3>
-                        <p>Strategic SEO techniques to improve your content's visibility and ranking on YouTube.</p>
+                        <h3 data-lang-key="service3_title">SEO Optimization</h3>
+                        <p data-lang-key="service3_desc">Strategic SEO techniques to improve your content's visibility and ranking on YouTube.</p>
                         <a href="https://wa.me/yourphonenumber?text=I'm%20interested%20in%20your%20Video%20Production%20service" target="_blank" class="btn btn-primary service-buy-btn">
-                            <i class="fas fa-shopping-cart me-2"></i>Buy Now
+                            <i class="fas fa-shopping-cart me-2"></i><span data-lang-key="service_buy_button">Buy Now</span>
                         </a>
                     </div>
                 </div>
@@ -135,9 +142,9 @@
     <section id="portfolio" class="portfolio-section py-5 bg-light">
         <div class="container">
             <div class="section-header text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Our Work</h2>
+                <h2 class="fw-bold" data-lang-key="portfolio_title">Our Work</h2>
                 <div class="section-divider"></div>
-                <p class="lead">Check out some of our best YouTube content projects</p>
+                <p class="lead" data-lang-key="portfolio_subtitle">Check out some of our best YouTube content projects</p>
             </div>
             
             <div class="row g-4">
@@ -148,10 +155,10 @@
                         </div>
                         <div class="portfolio-overlay">
                             <div class="portfolio-content">
-                                <h4>Professional Videography</h4>
-                                <p>Video Production</p>
+                                <h4 data-lang-key="portfolio1_title">Professional Videography</h4>
+                                <p data-lang-key="portfolio1_category">Video Production</p>
                                 <a href="https://www.youtube.com/watch?v=x1WMLywZWGM" class="btn btn-sm btn-primary" target="_blank">
-                                    <i class="fab fa-youtube me-1"></i> Watch
+                                    <i class="fab fa-youtube me-1"></i> <span data-lang-key="portfolio_watch_button">Watch</span>
                                 </a>
                             </div>
                         </div>
@@ -164,10 +171,10 @@
                         </div>
                         <div class="portfolio-overlay">
                             <div class="portfolio-content">
-                                <h4>Expert Content Editing</h4>
-                                <p>Content Editing</p>
+                                <h4 data-lang-key="portfolio2_title">Expert Content Editing</h4>
+                                <p data-lang-key="portfolio2_category">Content Editing</p>
                                 <a href="https://www.youtube.com/watch?v=TcMBFSGVi1c" class="btn btn-sm btn-primary" target="_blank">
-                                    <i class="fab fa-youtube me-1"></i> Watch
+                                    <i class="fab fa-youtube me-1"></i> <span data-lang-key="portfolio_watch_button">Watch</span>
                                 </a>
                             </div>
                         </div>
@@ -180,10 +187,10 @@
                         </div>
                         <div class="portfolio-overlay">
                             <div class="portfolio-content">
-                                <h4>SEO Strategy Implementation</h4>
-                                <p>SEO Optimization</p>
+                                <h4 data-lang-key="portfolio3_title">SEO Strategy Implementation</h4>
+                                <p data-lang-key="portfolio3_category">SEO Optimization</p>
                                 <a href="https://www.youtube.com/watch?v=TcMBFSGVi1c" class="btn btn-sm btn-primary" target="_blank">
-                                    <i class="fab fa-youtube me-1"></i> Watch
+                                    <i class="fab fa-youtube me-1"></i> <span data-lang-key="portfolio_watch_button">Watch</span>
                                 </a>
                             </div>
                         </div>
@@ -197,9 +204,9 @@
     <section id="testimonials" class="testimonial-section py-5">
         <div class="container">
             <div class="section-header text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Client Testimonials</h2>
+                <h2 class="fw-bold" data-lang-key="testimonials_title">Client Testimonials</h2>
                 <div class="section-divider"></div>
-                <p class="lead">What our clients say about our services</p>
+                <p class="lead" data-lang-key="testimonials_subtitle">What our clients say about our services</p>
             </div>
             
             <div class="row g-4">
@@ -216,9 +223,9 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p>"The quality of content they produced for my YouTube channel was exceptional. Highly recommended!"</p>
-                            <h5 class="testimonial-name">John Smith</h5>
-                            <p class="testimonial-role">Content Creator</p>
+                            <p data-lang-key="testimonial1_text">"The quality of content they produced for my YouTube channel was exceptional. Highly recommended!"</p>
+                            <h5 class="testimonial-name" data-lang-key="testimonial1_name">John Smith</h5>
+                            <p class="testimonial-role" data-lang-key="testimonial1_role">Content Creator</p>
                         </div>
                     </div>
                 </div>
@@ -235,9 +242,9 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p>"Their SEO optimization services helped my videos rank higher and gain more visibility. Amazing work!"</p>
-                            <h5 class="testimonial-name">Sarah Johnson</h5>
-                            <p class="testimonial-role">Entrepreneur</p>
+                            <p data-lang-key="testimonial2_text">"Their SEO optimization services helped my videos rank higher and gain more visibility. Amazing work!"</p>
+                            <h5 class="testimonial-name" data-lang-key="testimonial2_name">Sarah Johnson</h5>
+                            <p class="testimonial-role" data-lang-key="testimonial2_role">Entrepreneur</p>
                         </div>
                     </div>
                 </div>
@@ -254,9 +261,9 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <p>"Professional, responsive, and creative team. They transformed my YouTube presence completely!"</p>
-                            <h5 class="testimonial-name">David Brown</h5>
-                            <p class="testimonial-role">Business Owner</p>
+                            <p data-lang-key="testimonial3_text">"Professional, responsive, and creative team. They transformed my YouTube presence completely!"</p>
+                            <h5 class="testimonial-name" data-lang-key="testimonial3_name">David Brown</h5>
+                            <p class="testimonial-role" data-lang-key="testimonial3_role">Business Owner</p>
                         </div>
                     </div>
                 </div>
@@ -269,12 +276,12 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8" data-aos="fade-right">
-                    <h2 class="text-white fw-bold">Ready to elevate your YouTube content?</h2>
-                    <p class="lead text-white mb-0">Get in touch with us today to discuss your project needs!</p>
+                    <h2 class="text-white fw-bold" data-lang-key="cta_title">Ready to elevate your YouTube content?</h2>
+                    <p class="lead text-white mb-0" data-lang-key="cta_subtitle">Get in touch with us today to discuss your project needs!</p>
                 </div>
                 <div class="col-lg-4 text-lg-end" data-aos="fade-left">
                     <a href="https://wa.me/+201157299077" target="_blank" class="btn btn-light btn-lg">
-                        <i class="fab fa-whatsapp me-2"></i>Contact on WhatsApp
+                        <i class="fab fa-whatsapp me-2"></i><span data-lang-key="cta_button">Contact on WhatsApp</span>
                     </a>
                 </div>
             </div>
@@ -285,9 +292,9 @@
     <section id="contact" class="contact-section py-5 bg-light">
         <div class="container">
             <div class="section-header text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Get In Touch</h2>
+                <h2 class="fw-bold" data-lang-key="contact_title">Get In Touch</h2>
                 <div class="section-divider"></div>
-                <p class="lead">Have questions? Reach out to us directly</p>
+                <p class="lead" data-lang-key="contact_subtitle">Have questions? Reach out to us directly</p>
             </div>
             
             <div class="row g-4">
@@ -296,24 +303,24 @@
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <div>
-                                <h5>Email</h5>
+                                <h5 data-lang-key="contact_email_title">Email</h5>
                                 <p>info@yourcompany.com</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
                             <div>
-                                <h5>Phone</h5>
+                                <h5 data-lang-key="contact_phone_title">Phone</h5>
                                 <p>+1 (123) 456-7890</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fab fa-whatsapp"></i>
                             <div>
-                                <h5>WhatsApp</h5>
+                                <h5 data-lang-key="contact_whatsapp_title">WhatsApp</h5>
                                 <p>+1 (123) 456-7890</p>
                                 <a href="https://wa.me/+201157299077" class="btn btn-primary btn-sm mt-2" target="_blank">
-                                    Message Now
+                                    <span data-lang-key="contact_message_button">Message Now</span>
                                 </a>
                             </div>
                         </div>
@@ -328,18 +335,18 @@
                 <div class="col-md-6" data-aos="fade-left">
                     <form class="contact-form">
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
+                            <input type="text" class="form-control" placeholder="Your Name" data-lang-key="contact_form_name" data-lang-type="placeholder" required>
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <input type="email" class="form-control" placeholder="Your Email" data-lang-key="contact_form_email" data-lang-type="placeholder" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Subject">
+                            <input type="text" class="form-control" placeholder="Subject" data-lang-key="contact_form_subject" data-lang-type="placeholder">
                         </div>
                         <div class="mb-3">
-                            <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            <textarea class="form-control" rows="5" placeholder="Your Message" data-lang-key="contact_form_message" data-lang-type="placeholder" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" data-lang-key="contact_form_button">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -351,11 +358,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <p class="mb-0">&copy; 2024 Your Company Name. All Rights Reserved.</p>
+                    <p class="mb-0" data-lang-key="footer_copyright">&copy; 2024 Your Company Name. All Rights Reserved.</p>
                 </div>
                 <div class="col-lg-6 text-lg-end">
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link" data-lang-key="footer_privacy">Privacy Policy</a>
+                    <a href="#" class="footer-link" data-lang-key="footer_terms">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -371,6 +378,9 @@
     
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Translations -->
+    <script src="js/translations.js"></script>
     
     <!-- Custom JS -->
     <script src="js/script.js"></script>
