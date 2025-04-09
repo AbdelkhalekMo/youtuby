@@ -174,15 +174,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Setup mobile language toggle button with its own functionality
+    const langToggleMobile = document.getElementById('langToggleMobile');
+    if (langToggleMobile) {
+        langToggleMobile.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Toggle between 'en' and 'ar' directly
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            
+            // Save language preference
+            localStorage.setItem('ytcreator_lang', currentLang);
+            
+            // Apply the language
+            applyLanguage(currentLang);
+            
+            // Close the mobile menu after language switch
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                const toggler = document.querySelector('.navbar-toggler');
+                if (toggler) {
+                    toggler.click();
+                }
+            }
+        });
+    }
+    
     /**
      * Apply language translations to the whole page
      * @param {string} lang - Language code ('en' or 'ar')
      */
     function applyLanguage(lang) {
-        // Update language indicator in button
+        // Update language indicator in desktop button
         const langIndicator = document.getElementById('currentLang');
         if (langIndicator) {
             langIndicator.textContent = lang.toUpperCase();
+        }
+        
+        // Update language indicator in mobile button
+        const mobileIndicators = document.getElementsByClassName('currentLangMobile');
+        if (mobileIndicators && mobileIndicators.length > 0) {
+            Array.from(mobileIndicators).forEach(indicator => {
+                indicator.textContent = lang.toUpperCase();
+            });
         }
         
         // Apply RTL/LTR direction
@@ -425,19 +459,36 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Function to format and send WhatsApp message
         function sendWhatsAppMessage(name, email, subject, message, locationData) {
-            // Format WhatsApp message
+            // Set message headers based on current language
+            const headers = {
+                name: currentLang === 'en' ? 'Name' : 'الاسم',
+                email: currentLang === 'en' ? 'Email' : 'البريد الإلكتروني',
+                subject: currentLang === 'en' ? 'Subject' : 'الموضوع',
+                message: currentLang === 'en' ? 'Message' : 'الرسالة'
+            };
+            
+            // Format WhatsApp message with appropriate language headers
             let whatsappMessage = 
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                (subject ? `Subject: ${subject}\n` : '') +
-                `Message: ${message}`;
+                `${headers.name}: ${name}\n` +
+                `${headers.email}: ${email}\n` +
+                (subject ? `${headers.subject}: ${subject}\n` : '') +
+                `${headers.message}: ${message}`;
             
             // Add location if available
             if (locationData) {
                 const locationUrl = `https://maps.google.com/maps?q=${locationData.latitude},${locationData.longitude}&z=15`;
-                whatsappMessage += `\n\nLocation: ${locationUrl}\n` +
-                                   `Coordinates: ${locationData.latitude}, ${locationData.longitude}\n` +
-                                   `Accuracy: ~${Math.round(locationData.accuracy)} meters`;
+                
+                // Location headers
+                const locationHeaders = {
+                    location: currentLang === 'en' ? 'Location' : 'الموقع',
+                    coordinates: currentLang === 'en' ? 'Coordinates' : 'الإحداثيات',
+                    accuracy: currentLang === 'en' ? 'Accuracy' : 'الدقة',
+                    meters: currentLang === 'en' ? 'meters' : 'متر'
+                };
+                
+                whatsappMessage += `\n\n${locationHeaders.location}: ${locationUrl}\n` +
+                                   `${locationHeaders.coordinates}: ${locationData.latitude}, ${locationData.longitude}\n` +
+                                   `${locationHeaders.accuracy}: ~${Math.round(locationData.accuracy)} ${locationHeaders.meters}`;
             }
             
             // Create WhatsApp URL with international format

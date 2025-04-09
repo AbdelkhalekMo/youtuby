@@ -32,9 +32,11 @@
                 <img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="Logo" class="img-fluid logo-img">
                 <span class="ms-2">YTCreator</span>
             </a>
-            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <!-- Toggler button only visible on mobile -->
+            <button class="navbar-toggler custom-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Navigation with language button included in desktop view -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -52,7 +54,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact" data-lang-key="nav_contact">Contact</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- Language switch in desktop navbar, hidden on mobile -->
+                    <li class="nav-item d-none d-lg-block">
                         <div class="lang-switch">
                             <button id="langToggle" class="btn btn-sm btn-outline-light">
                                 <i class="fas fa-globe me-1"></i><span id="currentLang">EN</span>
@@ -60,6 +63,12 @@
                         </div>
                     </li>
                 </ul>
+                <!-- Language switch for mobile view -->
+                <div class="lang-switch d-lg-none mt-3 text-center">
+                    <button id="langToggleMobile" class="btn btn-sm btn-outline-light">
+                        <i class="fas fa-globe me-1"></i><span class="currentLangMobile">EN</span>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -73,7 +82,7 @@
                     <h1 class="display-4 fw-bold text-white" data-lang-key="hero_title">Premium YouTube Content Creation Services</h1>
                     <p class="lead text-white" data-lang-key="hero_subtitle">Transform your ideas into engaging YouTube content that captivates and converts your audience</p>
                     <div class="hero-buttons">
-                        <a href="#services" class="btn btn-primary btn-lg me-3" data-lang-key="hero_button_services">Our Services</a>
+                        <a href="#services" class="btn btn-primary btn-lg" data-lang-key="hero_button_services">Our Services</a>
                         <a href="https://wa.me/+201157299077" target="_blank" class="btn btn-outline-light btn-lg">
                             <i class="fab fa-whatsapp me-2"></i><span data-lang-key="hero_button_contact">Contact Now</span>
                         </a>

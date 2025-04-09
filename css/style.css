@@ -51,6 +51,13 @@ section {
     transition: var(--transition);
 }
 
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+}
+
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -71,6 +78,7 @@ section {
     padding: 15px 0;
     background-color: transparent;
     transition: var(--transition);
+    z-index: 1030; /* Ensure navbar is above other content */
 }
 
 .navbar.scrolled {
@@ -145,6 +153,17 @@ section {
     color: #fff;
     display: flex;
     align-items: center;
+    padding-top: 76px; /* Add padding to prevent navbar overlap */
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 560px; /* Standard YouTube video width */
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .hero-section .overlay {
@@ -500,6 +519,45 @@ section {
         padding: 60px 0;
     }
     
+    .hero-section {
+        padding-top: 90px;
+        padding-bottom: 30px;
+        min-height: auto;
+        height: auto;
+    }
+    
+    .hero-section .row {
+        text-align: center;
+    }
+    
+    .hero-section .col-lg-6 {
+        margin-bottom: 30px;
+        padding: 0 15px;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+        margin-top: 25px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 0 15px;
+    }
+    
+    .hero-buttons .btn {
+        margin: 0;
+        flex-basis: calc(50% - 15px);
+        min-width: 140px;
+        text-align: center;
+    }
+    
+    .video-container {
+        width: 100%;
+        max-width: 90%;
+        margin: 20px auto;
+    }
+    
     .hero-section h1 {
         font-size: 2.5rem;
     }
@@ -523,13 +581,24 @@ section {
 @media (max-width: 767px) {
     .hero-section {
         text-align: center;
+        padding-top: 80px; /* Adjusted padding for mobile */
+        padding-bottom: 40px;
+        height: auto; /* Allow height to adjust to content */
+        min-height: auto; /* Removed fixed height constraint */
     }
     
     .hero-section h1 {
         font-size: 2rem;
+        margin-top: 0; /* Reset any top margin */
     }
     
     .hero-section .col-lg-6:first-child {
+        margin-bottom: 30px;
+        padding: 15px; /* Add padding to content container */
+    }
+    
+    .video-container {
+        margin-top: 20px;
         margin-bottom: 30px;
     }
     
@@ -559,19 +628,48 @@ section {
 }
 
 @media (max-width: 575px) {
+    /* Fix the audience text */
+    .hero-section .lead {
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+    
+    .hero-section h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
     .btn-lg {
         padding: 8px 20px;
         font-size: 0.9rem;
     }
     
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        margin-top: 20px;
+        padding: 0 15px;
+    }
+    
     .hero-buttons .btn {
         display: block;
         width: 100%;
-        margin-bottom: 10px;
+        margin: 0;
+        padding: 12px 20px;
+        font-size: 16px;
     }
     
     .hero-buttons .btn:last-child {
-        margin-left: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Fix video container on small screens */
+    .video-container {
+        width: 100%;
+        border-radius: 8px;
     }
 }
 
@@ -661,6 +759,47 @@ section {
     color: var(--primary-color);
 }
 
+/* Responsive language switch for mobile */
+@media (max-width: 991px) {
+    .lang-switch {
+        margin: 10px 0;
+    }
+
+    #langToggle, #langToggleMobile {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        margin: 0 auto;
+    }
+    
+    /* Make mobile language switch visible and centered */
+    .navbar-collapse {
+        text-align: center;
+    }
+    
+    /* Fix navbar toggler position and visibility */
+    .navbar-toggler {
+        position: relative;
+        z-index: 1031;
+    }
+    
+    /* Ensure toggler is only visible on mobile */
+    .d-lg-none {
+        display: none !important;
+    }
+    
+    @media (max-width: 991px) {
+        .d-lg-none {
+            display: block !important;
+        }
+    }
+    
+    /* Improve spacing for collapsed menu */
+    .navbar-nav {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
 /* ======= RTL (Right to Left) Support ======= */
 .rtl {
     text-align: right;
@@ -677,12 +816,12 @@ section {
 .rtl .service-card,
 .rtl .testimonial-card,
 .rtl .contact-form {
-    text-align: right;
+    text-align: center;
 }
 
 .rtl .hero-section h1,
 .rtl .hero-section p {
-    text-align: right;
+    text-align: center;
 }
 
 .rtl .service-icon {
@@ -698,6 +837,34 @@ section {
 
 .rtl .testimonial-content {
     text-align: right;
+}
+
+/* Center alignment for cards in RTL responsive mode */
+@media (max-width: 767px) {
+    .rtl .portfolio-item {
+        text-align: center;
+    }
+    
+    .rtl .card-body,
+    .rtl .portfolio-content {
+        text-align: center;
+    }
+    
+    .rtl .service-icon {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .rtl .contact-item {
+        flex-direction: column; /* Stack items vertically on mobile */
+        align-items: center;
+        text-align: center;
+    }
+    
+    .rtl .contact-item i {
+        margin-left: 0;
+        margin-bottom: 8px;
+    }
 }
 
 .rtl .contact-item {
